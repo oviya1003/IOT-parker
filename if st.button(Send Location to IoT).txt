@@ -1,0 +1,13 @@
+if st.button("Send Location to IoT"):
+    try:
+        data = {"latitude": latitude, "longitude": longitude}
+        response = requests.post(iot_endpoint, json=data)
+        if response.status_code == 200:
+            st.success("Location sent successfully!")
+            st.write("Response:", response.json())
+        else:
+            st.error(f"Failed to send location. Status code: {response.status_code}")
+            st.write("Response:", response.text)
+    except Exception as e:
+        st.error("Error sending location to IoT system.")
+        st.write(e)
